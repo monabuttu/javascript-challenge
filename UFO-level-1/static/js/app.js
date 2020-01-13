@@ -35,4 +35,14 @@ button.on("click", function() {
 
   console.log(filteredData);
 
+  tableData.forEach((filteredData) => {
+    d3.selectAll("tr").remove();
+    d3.selectAll("td").remove();
+    var row = tableBody.append("tr");
+    Object.entries(filteredData).forEach(([key,value]) => {
+        var cell = row.append("td");
+        cell.text(value);
+    }); 
+});
+
 });
