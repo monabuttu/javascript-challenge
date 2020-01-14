@@ -32,17 +32,31 @@ button.on("click", function() {
   var filteredData = tableData.filter(date => 
     date.datetime == inputValue);
     
-
   console.log(filteredData);
 
-  tableData.forEach((filteredData) => {
-    d3.selectAll("tr").remove();
-    d3.selectAll("td").remove();
+  d3.selectAll("tr").remove();
+  d3.selectAll("td").remove();
+  
+// output filtered data
+
+  filteredData.forEach((data) => {
     var row = tableBody.append("tr");
-    Object.entries(filteredData).forEach(([key,value]) => {
+    Object.entries(data).forEach(([key,value]) => {
         var cell = row.append("td");
         cell.text(value);
     }); 
 });
+
+// reset chart to show all data if user enters a blank value
+
+  if (inputValue === ""){
+    tableData.forEach((sighting) => {
+      var row = tableBody.append("tr");
+      Object.entries(sighting).forEach(([key,value]) => {
+          var cell = row.append("td");
+          cell.text(value);
+      }); 
+  });  
+  }
 
 });
